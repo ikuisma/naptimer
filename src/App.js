@@ -49,7 +49,7 @@ class App extends Component {
     document.body.appendChild(dummy)
     dummy.value = this.getDifference()
     dummy.select()
-    document.execCommand('copy',false);
+    document.execCommand('copy')
     dummy.remove()
   }
 
@@ -100,7 +100,7 @@ class App extends Component {
             fullWidth
             variant="contained"
             color="primary"
-            onClick={this.copyToClip}
+            onClick={this.copyToClipboard}
           >
             Copy to Clipboard
           </Button>
