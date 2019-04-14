@@ -15,16 +15,11 @@ const styles = theme => ({
     height: '100%',
     marginTop: '1rem',
     maxWidth: '600px',
-    margin: 'auto'
+    margin: 'auto',
+    padding: theme.spacing.unit * 2
   },
   textField: {
-    marginLeft: theme.spacing.unit,
-    marginRight: theme.spacing.unit,
     width: '100%'
-  },
-  button: {
-    marginLeft: theme.spacing.unit,
-    marginRight: theme.spacing.unit
   }
 });
 
@@ -106,7 +101,6 @@ class App extends Component {
             variant="contained"
             color="primary"
             onClick={this.copyToClip}
-            className={classes.button}
           >
             Copy to Clipboard
           </Button>
