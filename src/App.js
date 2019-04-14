@@ -35,8 +35,10 @@ class App extends Component {
   }
   getDifference = () => {
     const { start, end } = this.state
-    const minutes = mins(end) - mins(start)
-    return minutes
+    const difference = mins(end) - mins(start)
+    const hours = parseInt(difference / 60)
+    const minutes = difference % 60
+    return `${hours} h, ${minutes} min.`
   }
   updateTime = ({ target }) => this.setState({ [target.id]: target.value })
 
@@ -48,7 +50,7 @@ class App extends Component {
         <CssBaseline />
         <div className={classes.container}>
           <Typography variant="h4" gutterBottom>
-            Bubz Naptimer
+            Naptimer
           </Typography>
           <TextField
             id="start"
