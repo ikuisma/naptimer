@@ -45,12 +45,28 @@ class App extends Component {
   updateTime = ({ target }) => this.setState({ [target.id]: target.value })
 
   copyToClipboard = () => {
-    const dummy = document.createElement('input');
-    document.body.appendChild(dummy)
-    dummy.value = this.getDifference()
-    dummy.select()
+    const input = document.createElement('input')
+    document.body.appendChild(input)
+    input.value = this.getDifference()
+    const isiOSDevice = navigator.userAgent.match(/ipad|iphone/i);
+    if (isiOSDevice) {
+      const editable = input.contentEditable
+      const readOnly = input.readOnly
+      input.contentEditable = true
+      input.readOnly = false
+      const range = document.createRange()
+      range.selectNodeContents(input)
+      const selection = window.getSelection()
+      selection.removeAllRanges()
+      selection.addRange(range)
+      input.setSelectionRange(0, 999999)
+      input.contentEditable = editable
+      input.readOnly = readOnly
+    } else {
+      input.select()
+    }
     document.execCommand('copy')
-    dummy.remove()
+    input.remove()
   }
 
   render() {
