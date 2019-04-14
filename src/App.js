@@ -22,6 +22,10 @@ const styles = theme => ({
     marginRight: theme.spacing.unit,
     width: '100%'
   },
+  button: {
+    marginLeft: theme.spacing.unit,
+    marginRight: theme.spacing.unit
+  }
 });
 
 const mins = str => {
@@ -102,6 +106,7 @@ class App extends Component {
             variant="contained"
             color="primary"
             onClick={this.copyToClip}
+            className={classes.button}
           >
             Copy to Clipboard
           </Button>
