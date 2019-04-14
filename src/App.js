@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import CssBaseline from '@material-ui/core/CssBaseline';
 import TextField from '@material-ui/core/TextField';
 import Typography from '@material-ui/core/Typography';
+import Button from '@material-ui/core/Button';
 
 import { withStyles } from '@material-ui/core/styles';
 
@@ -33,14 +34,25 @@ class App extends Component {
     start: '08:30',
     end: '09:30'
   }
+
   getDifference = () => {
     const { start, end } = this.state
     const difference = mins(end) - mins(start)
     const hours = parseInt(difference / 60)
     const minutes = difference % 60
-    return `${hours} h, ${minutes} min.`
+    return `${hours} hour(s) and ${minutes} minute(s)`
   }
+
   updateTime = ({ target }) => this.setState({ [target.id]: target.value })
+
+  copyToClipboard = () => {
+    const dummy = document.createElement('input');
+    document.body.appendChild(dummy)
+    dummy.value = this.getDifference()
+    dummy.select()
+    document.execCommand('copy',false);
+    dummy.remove()
+  }
 
   render() {
     const { classes } = this.props
@@ -80,7 +92,19 @@ class App extends Component {
               step: 300, // 5 min
             }}
           />
-          <p>{`Bubz napped for ${this.getDifference()} minutez!`}</p>
+          <p>
+            Bubzilla napped for
+            <b> {this.getDifference()}</b>
+            !
+          </p>
+          <Button
+            fullWidth
+            variant="contained"
+            color="primary"
+            onClick={this.copyToClip}
+          >
+            Copy to Clipboard
+          </Button>
         </div>
       </React.Fragment>
     );
